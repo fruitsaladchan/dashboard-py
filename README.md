@@ -1,6 +1,6 @@
 # dashboard-py
 
-#requirments
+# requirments
 ```
 pip install flask psutil logging
 ```
