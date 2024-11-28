@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="dashboard">
+      <div class="card" id="greeting-card">
+        <h2 id="greeting">Welcome</h2>
+      </div>
+
+      <div class="card" id="time-card">
+        <h2>Time & Date</h2>
+        <div class="time" id="current-time">00:00:00</div>
+        <div class="date" id="current-date">2023-01-01</div>
+      </div>
+
+      <div class="card" id="system-info">
+        <h2>System Info</h2>
+        <div class="metric">
+          <div class="label">Hostname</div>
+          <div class="value" id="hostname">-</div>
+        </div>
+        <div class="metric">
+          <div class="label">Operating System</div>
+          <div class="value" id="os-info">-</div>
+        </div>
+        <div class="metric">
+          <div class="label">Distribution</div>
+          <div class="value" id="os-distro">-</div>
+        </div>
+        <div class="metric">
+          <div class="label">Architecture</div>
+          <div class="value" id="os-arch">-</div>
+        </div>
+      </div>
+
+      <div class="card" id="network-info">
+        <h2>Network Info</h2>
+        <div class="metric">
+          <div class="label">Private IP</div>
+          <div class="value" id="private-ip">-</div>
+        </div>
+        <div class="metric">
+          <div class="label">Public IP</div>
+          <div class="value" id="public-ip">-</div>
+        </div>
+        <div class="metric">
+          <div class="label">MAC Address</div>
+          <div class="value" id="mac-address">-</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>CPU</h2>
+        <div class="metric">
+          <div class="label">Usage</div>
+          <div class="value"><span id="cpu-usage">0</span>%</div>
+          <div class="progress-bar">
+            <div class="progress" id="cpu-progress"></div>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="label">Temperature</div>
+          <div class="value"><span id="cpu-temp">0</span>°C</div>
+        </div>
+        <div class="metric">
+          <div class="label">Frequency</div>
+          <div class="value"><span id="cpu-freq">0</span> GHz</div>
+        </div>
+        <div class="metric">
+          <div class="label">Cores/Threads</div>
+          <div class="value">
+            <span id="cpu-cores">0</span>/<span id="cpu-threads">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Memory</h2>
+        <div class="metric">
+          <div class="label">Usage</div>
+          <div class="value"><span id="memory-usage">0</span>%</div>
+          <div class="progress-bar">
+            <div class="progress" id="memory-progress"></div>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="label">Used/Total</div>
+          <div class="value">
+            <span id="memory-used">0GB</span> /
+            <span id="memory-total">0GB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Storage</h2>
+        <div class="metric">
+          <div class="label">Usage</div>
+          <div class="value"><span id="storage-usage">0</span>%</div>
+          <div class="progress-bar">
+            <div class="progress" id="storage-progress"></div>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="label">Used/Total</div>
+          <div class="value">
+            <span id="storage-used">0GB</span> /
+            <span id="storage-total">0GB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Network</h2>
+        <div class="metric">
+          <div class="label">Upload Speed</div>
+          <div class="value"><span id="network-up-speed">0KB/s</span></div>
+          <div class="progress-bar">
+            <div class="progress" id="network-up-progress"></div>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="label">Download Speed</div>
+          <div class="value"><span id="network-down-speed">0KB/s</span></div>
+          <div class="progress-bar">
+            <div class="progress" id="network-down-progress"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Top Processes</h2>
+        <div id="top-processes">
+          <table class="process-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>CPU %</th>
+                <th>Memory %</th>
+              </tr>
+            </thead>
+            <tbody id="process-list"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Active Users</h2>
+        <div id="users-list" class="users-container"></div>
+      </div>
+
+      <div class="card">
+        <h2>Fans</h2>
+        <div id="fans-list" class="fans-container"></div>
+      </div>
+
+      <div class="card">
+        <h2>Battery</h2>
+        <div class="metric">
+          <div class="label">Charge</div>
+          <div class="value">
+            <span id="battery-percent">0</span>%
+            <span id="battery-status"></span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress" id="battery-progress"></div>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="label">Time Remaining</div>
+          <div class="value" id="battery-time">-</div>
+        </div>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
