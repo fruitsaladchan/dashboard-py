@@ -184,25 +184,11 @@ def get_stats():
         else None
     )
 
-    # Get system uptime
-    uptime_seconds = time.time() - psutil.boot_time()
-    days = int(uptime_seconds // (24 * 3600))
-    hours = int((uptime_seconds % (24 * 3600)) // 3600)
-    minutes = int((uptime_seconds % 3600) // 60)
-
-    if days > 0:
-        uptime = f"{days}d {hours}h {minutes}m"
-    elif hours > 0:
-        uptime = f"{hours}h {minutes}m"
-    else:
-        uptime = f"{minutes}m"
-
     return jsonify(
         {
             "time": datetime.now().strftime("%I:%M"),
             "date": datetime.now().strftime("%A, %B, %d, %Y"),
             "greeting": get_greeting(),
-            "uptime": uptime,
             "time": datetime.now().strftime("%I:%M"),
             "cpu_percent": cpu_percent,
             "cpu_temp": cpu_temp,

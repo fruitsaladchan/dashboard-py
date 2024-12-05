@@ -7,7 +7,7 @@ function updateProgressColors(elementId, percentage) {
   } else if (percentage >= 70) {
     element.style.backgroundColor = "#ffc107"; // yellow for warning
   } else {
-    element.style.backgroundColor = "#198754"; // green for normal
+    element.style.backgroundColor = "#93f2cc"; // green for normal
   }
 }
 
