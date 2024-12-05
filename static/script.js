@@ -1,9 +1,35 @@
+function updateProgressColors(elementId, percentage) {
+  const element = document.getElementById(elementId);
+  if (!element) return;
+
+  if (percentage >= 90) {
+    element.style.backgroundColor = "#dc3545"; // red for critical
+  } else if (percentage >= 70) {
+    element.style.backgroundColor = "#ffc107"; // yellow for warning
+  } else {
+    element.style.backgroundColor = "#198754"; // green for normal
+  }
+}
+
+function animateCards() {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add("fade-in");
+    }, index * 100);
+  });
+}
+
+// Initial animation when page loads
+document.addEventListener("DOMContentLoaded", animateCards);
+
 function updateStats() {
   fetch("/stats")
     .then((response) => response.json())
     .then((data) => {
       // greeting
       document.getElementById("greeting").textContent = data.greeting;
+      document.getElementById("system-uptime").textContent = data.uptime;
 
       // time and date
       document.getElementById("current-time").textContent = data.time;
@@ -138,3 +164,14 @@ function updateStats() {
 setInterval(updateStats, 2000);
 
 updateStats();
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+      card.classList.remove("fade-in");
+    });
+    void document.body.offsetHeight;
+    animateCards();
+  }
+});
