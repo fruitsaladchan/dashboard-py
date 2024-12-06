@@ -31,7 +31,6 @@ function animateCards() {
   });
 }
 
-// Initial animation when page loads
 document.addEventListener("DOMContentLoaded", animateCards);
 
 function updateStats() {
@@ -171,6 +170,44 @@ function updateStats() {
       updateProgressColors("network-down-progress", data.network_down_percent);
     });
 }
+
+function confirmPowerAction(action) {
+  const capitalizedAction = action.charAt(0).toUpperCase() + action.slice(1);
+  const confirmed = confirm(`Are you sure you want to ${action} the system?`);
+
+  if (confirmed) {
+    fetch(`/power/${action}`, {
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          alert(`${capitalizedAction} initiated`);
+        } else {
+          alert("Action failed: " + data.message);
+        }
+      })
+      .catch((error) => {
+        alert("Error: " + error.message);
+      });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const powerButtons = {
+    "shutdown-btn": "shutdown",
+    "restart-btn": "restart",
+    "sleep-btn": "sleep",
+    "hibernate-btn": "hibernate",
+  };
+
+  Object.entries(powerButtons).forEach(([buttonId, action]) => {
+    const button = document.getElementById(buttonId);
+    if (button) {
+      button.addEventListener("click", () => confirmPowerAction(action));
+    }
+  });
+});
 
 setInterval(updateStats, 2000);
 

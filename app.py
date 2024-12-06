@@ -9,8 +9,33 @@ import distro
 import requests
 import uuid
 import time
+import os
+import sys
 
 app = Flask(__name__)
+
+
+def run_system_command(command):
+    if sys.platform.startswith("win"):
+        if command == "shutdown":
+            os.system("shutdown /s /t 1")
+        elif command == "restart":
+            os.system("shutdown /r /t 1")
+        elif command == "sleep":
+            os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
+        elif command == "hibernate":
+            os.system("shutdown /h")
+    else:
+        if command == "shutdown":
+            os.system("systemctl poweroff")
+        elif command == "restart":
+            os.system("systemctl reboot")
+        elif command == "sleep":
+            os.system("systemctl suspend")
+        elif command == "hibernate":
+            os.system("systemctl hibernate")
+
+
 print(f"opening on 127.0.0.1:5000 ")
 print("")
 
@@ -54,6 +79,14 @@ def get_private_ip():
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/power/<action>", methods=["POST"])
+def power_action(action):
+    if action in ["shutdown", "restart", "sleep", "hibernate"]:
+        run_system_command(action)
+        return jsonify({"status": "success", "message": f"System {action} initiated"})
+    return jsonify({"status": "error", "message": "Invalid action"}), 400
 
 
 @app.route("/stats")

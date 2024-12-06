@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
@@ -23,6 +28,24 @@
         <h2>Time & Date</h2>
         <div class="time" id="current-time">00:00:00</div>
         <div class="date" id="current-date">2023-01-01</div>
+      </div>
+
+      <div class="card">
+        <h2>Power Controls</h2>
+        <div class="power-controls">
+          <button id="shutdown-btn" class="power-btn">
+            <i class="fas fa-power-off"></i> Shutdown
+          </button>
+          <button id="restart-btn" class="power-btn">
+            <i class="fas fa-redo"></i> Restart
+          </button>
+          <button id="sleep-btn" class="power-btn">
+            <i class="fas fa-moon"></i> Sleep
+          </button>
+          <button id="hibernate-btn" class="power-btn">
+            <i class="fas fa-snowflake"></i> Hibernate
+          </button>
+        </div>
       </div>
 
       <div class="card" id="system-info">
