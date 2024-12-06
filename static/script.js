@@ -1,13 +1,24 @@
-function updateProgressColors(elementId, percentage) {
+function updateProgressColors(elementId, percentage, reverse = false) {
   const element = document.getElementById(elementId);
   if (!element) return;
 
-  if (percentage >= 90) {
-    element.style.backgroundColor = "#dc3545"; // red for critical
-  } else if (percentage >= 70) {
-    element.style.backgroundColor = "#ffc107"; // yellow for warning
+  if (reverse) {
+    // reverse for battery
+    if (percentage <= 20) {
+      element.style.backgroundColor = "#dc3545";
+    } else if (percentage <= 50) {
+      element.style.backgroundColor = "#ffc107";
+    } else {
+      element.style.backgroundColor = "#93f2cc";
+    }
   } else {
-    element.style.backgroundColor = "#93f2cc"; // green for normal
+    if (percentage >= 90) {
+      element.style.backgroundColor = "#dc3545";
+    } else if (percentage >= 70) {
+      element.style.backgroundColor = "#ffc107";
+    } else {
+      element.style.backgroundColor = "#93f2cc";
+    }
   }
 }
 
@@ -150,7 +161,7 @@ function updateStats() {
             : "Calculating...";
         }
 
-        updateProgressColors("battery-progress", data.battery.percent);
+        updateProgressColors("battery-progress", data.battery.percent, true);
       }
 
       updateProgressColors("cpu-progress", data.cpu_percent);
