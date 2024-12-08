@@ -71,6 +71,30 @@ body {
   grid-column: span 2;
 }
 
+#cpu-info .metric,
+#memory-info .metric,
+#storage-info .metric {
+  margin-bottom: 15px;
+}
+
+#memory-info,
+#netspeed,
+#storage-info {
+  height: 150px !important;
+  min-height: 200px;
+  max-height: 200px;
+}
+
+#battery-info {
+  margin-top: -12rem;
+  grid-column: span 2;
+}
+
+#fans-info {
+  margin-top: -12rem;
+  grid-column: span 1;
+}
+
 #top-processes {
   grid-column: span 4;
 }
